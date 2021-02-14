@@ -1,0 +1,135 @@
+- Max Pairwise Product
+- Fibonacci Number 0, 1, Fn-1, Fn-2
+    Lemma Algorithm - Fn >= 2^n/2 for n >=6
+    Naive Algorithm
+        if(n <= 1) return n
+        else FibRecurse(n-1) + FibRecurse(n-2)
+        T(n) = 2 if n <=1 
+        T(n-1) + T(n-2) + 3 else
+        T(n) >= Fn
+
+        FibList(n)
+            create an array F[0..n]
+            F[0] = 0
+            F[1] = 1
+            for i from 2 to n:
+                F[i] = F[i-1] + F[i-2]
+            return F[n]
+
+            T(n) = 2n + 2
+-  GCD
+    gcd(a,b) is the largest d so that d divides both a & b where a & b >=0
+    NaiveGCD(a, b)
+        best = 0
+        for d from 1 to a + b
+            if a/d and b/d
+                best = d
+        return best
+    Eiclidien Algorithm
+        a' is the remainder when a/b then 
+            gcd(a,b) = gcd(a',b) = gcd(b,a')
+
+            Function EuclidGCD(a,b)
+                if(b = 0)
+                    return a
+                a' = remainder when a/b
+                return EuclidGCD(b,a')
+- Asymptotic Notation
+    How does input size scale runtime 
+    logn - /n < n < n log n < n^2 < 2^n
+    Big O Notation
+- Greedy Algorithm
+    make a greedy choice
+    prove that the choice is a safe move
+    reduce a bigger problem to smaaller keeping the problem same
+    Solve the problem
+- Grouping Childrens
+    Organize the children in increasign order and then move the segment of 1 from leftmost to right.
+- Kanpsack
+    Find the per unit value of each item and then from max -> min determine the max kanpsack that can be stacked.
+- Binary Search
+    Mid Point 
+    Iterate either > Mid Point
+    Iterate or < Mid Point
+
+    BinarySearch(A, low, high, key)
+        if high < low
+            return low - 1
+        mid = low + (high -low)/2
+        if key = A[mid]
+            return mid
+        else if key < A[mid]
+            return BinarySearch(A,low, mid-1, key)
+        else 
+            return BinarySearch(A,mid+1, high, key)
+
+    while low <= high
+        mid = low + (high -low)/2
+        if key = A[mid]:
+            return mid
+        else if key < A[mid]
+            high = mid -1
+        else
+            low = mid + 1
+
+    return low - 1
+- BinarySearch
+    if high < low
+        return low - 1
+    mid = [low + (high -low)/2]
+    if key = A[mid]
+        return mid
+    else if key < A[mid]
+        return BinarySearch(A, low, mid-1, key)
+    else
+        return BinarySearch(A, mid + 1, high, key)
+
+
+- Selection Sort
+    Find a min by scanning the array
+    Swap it with the first element
+    Repeat with the remaining part of the array
+    for i from 1 to n
+        minIndex = i
+        for j from i + 1 to n:
+            if A[j] < A[minIndex]
+                minIndex = j
+            {A[minIndex] = min A[i..n]}
+            swap(A[i], A[minIndex])
+            {A[1..i]} is the final position
+- Mergesort (A[1..n]) -> O(n log n)
+    if(n=1)
+        return A
+    m = n/2
+    b = Mergesort(A[1..m])
+    c = Mergesort(A[m+1..n])
+    A' = Merge(B,C)
+    return A'
+
+- Merge(B[1...p], C[1...q])
+    { B and C are Sorted}
+    D = emoty array of size p + q
+    while B and C are both empty
+        b = the first element of B
+        c = the first elemnent of C
+        if b <= c:
+            move b from B to the end of D
+        else 
+            move c from C to end of D
+    move the rest of B and C to end of D
+    return D
+
+- QuickSort(A, l, r) (O n logn )
+    if l >=r 
+        return 
+    m = Partition(A,l,r)
+    {A[m] is in the final position}
+    QuickSort(A,l,m-1)
+    QuickSort(A,m+1,r)
+
+Partitioning example
+    the pivot is x = A[l]
+    move i from l + 1 to r maintaining the following invariant
+        A[k] <= x for all l + 1 <=k <=j
+        A[k] > x for all j + 1 <=k <i
+
